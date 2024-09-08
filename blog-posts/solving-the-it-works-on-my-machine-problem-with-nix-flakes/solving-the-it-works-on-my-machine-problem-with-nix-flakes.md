@@ -12,6 +12,10 @@ You’ve been working on a project for days; everything is running smoothly on y
 
 ![before-devops-after-devops](https://turnoff.us/image/en/before-devops-after-devops.png)
 
+## The "It Works on My Machine" Problem"
+
+This is a common problem in software development, and it usually happens because of the differences between the development and production environments. The development environment is usually a local machine, and the production environment is a remote server.
+
 ## Outline
 
 ### Intro
