@@ -1,7 +1,7 @@
 ---
 published: false
 title: 'Solving the "It Works on My Machine" Problem with Nix Flakes'
-cover_image: None
+cover_image: https://raw.githubusercontent.com/YOUR-USERNAME/YOUR-REPO/master/blog-posts/NAME-OF-YOUR-BLOG-POST/assets/your-asset.png
 description: 'An article about how to solve the "It Works on My Machine" problem with Nix Flakes.'
 tags: nix, flakes, python
 series:
