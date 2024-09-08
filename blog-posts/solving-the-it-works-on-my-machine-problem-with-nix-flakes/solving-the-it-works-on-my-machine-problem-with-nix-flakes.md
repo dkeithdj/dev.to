@@ -16,23 +16,38 @@ You’ve been working on a project for days; everything is running smoothly on y
 
 This is a common problem in software development, and it usually happens because of the differences between the development and production environments. The development environment is usually a local machine, and the production environment is a remote server.
 
-## Outline
+## Version Management Challenges
 
-### Intro
+## Introducing Nix
 
-- It works on my machine situation
-- X Version Management in general
-- X Version management problems
+## Where Docker Fits In
 
-### Body
+# What is Nix?
 
-- explain a bit of nix
-- explain a bit of nix flakes
-- explain the flake template
-- explain how nix can setup a project-based environment using flakes (the example we'll use is python and pyenv)
+[Nix](https://nixos.org) is a tool that takes a unique approach to package management and system configuration. Learn how to make reproducible, declarative and reliable systems.
 
-### Outro
+> Nix has its own language called Nix, a straightforward functional language. While I won't delve further into the language itself, here are the resources you can check out on how to start on writing Nix.
+>
+> - [Nix Language Basics - nix.dev](https://nix.dev/tutorials/nix-language)
+> - [A tour of Nix](https://nixcloud.io/tour/?id=introduction/nix)
+> - [Nix Language - Nix Reference Manual](https://nixos.org/manual/nix/stable/language/)
 
-- you can use it on any tool you want
+## Key Benefits
 
-### what's next?
+### Reproducible
+
+Nix ensures that your system is reproducible by providing a unique approach to package management and system configuration. So you can be sure that your system will work the same way on every machine.
+
+### Declarative
+
+Nix allows you to declare your system configuration in a simple and concise way. You can define your system configuration in a single file, and Nix will take care of the rest.
+
+### Reliable
+
+Nix is a reliable tool that ensures that your system is always in a consistent state. It provides a unique approach to package management and system configuration, so you can be sure that your system will always work as expected.
+
+# Now, Nix Flakes
+
+## What are Nix Flakes?
+
+[Nix Flakes](https://nixos.wiki/wiki/Flakes) is an experimental feature of Nix that provides a more convenient way to manage Nix projects. It allows you to define your project as a single file (`flake.nix`), and Nix will take care of the rest.
