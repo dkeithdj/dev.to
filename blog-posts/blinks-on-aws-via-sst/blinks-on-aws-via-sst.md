@@ -1,3 +1,13 @@
+---
+published: false
+title: 'Blinks on AWS via SST'
+# cover_image: https://raw.githubusercontent.com/YOUR-USERNAME/YOUR-REPO/master/blog-posts/NAME-OF-YOUR-BLOG-POST/assets/your-asset.png
+description: 'Develop and deploy Blinks on AWS via SST.'
+tags: aws, sst, solana, typescript
+series:
+canonical_url:
+---
+
 Most projects I know that revolves around _Blinks_ or [**Blockchain Links**](https://solana.com/solutions/actions) often use Next.js's [API Routes](https://nextjs.org/docs/app/api-reference/file-conventions/route) to develop and deploy _Blinks_.
 
 ## What are Blinks?
