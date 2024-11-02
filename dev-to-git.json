@@ -2,5 +2,9 @@
   {
     "id": 1982397,
     "relativePathToArticle": "./blog-posts/solving-the-it-works-on-my-machine-problem-with-nix-flakes/solving-the-it-works-on-my-machine-problem-with-nix-flakes.md"
+  },
+  {
+    "id": 2072751,
+    "relativePathToArticle": "./blog-posts/blinks-on-aws-via-sst/blinks-on-aws-via-sst.md"
   }
 ]
