@@ -12,10 +12,14 @@ Given that Solana Actions are just APIs, you can just use Express, Fastify, and 
 
 And in this blog, we'll develop and deploy our Blinks on Lambda with API Gateway via SST!
 
-## What is SST?
+### What is SST?
 
 > Serverless Stack (SST) is an open-source framework that makes it easy to build serverless applications on AWS [(SST)](https://sst.dev).
 
+### Prerequisites
+
+### Project Setup
+
 ## Outro
 
-This blog does not say that deploying blinks on Next.js is heavy/bloated etc. The purpose of this blog lets you have another method of deploying these things.
+This blog does not say that deploying blinks on Next.js is heavy/bloated etc. The purpose of this blog lets you have another method of deploying Blinks.
