@@ -1,10 +1,10 @@
 # One way publishing of your blog posts from a git repo to dev.to
 
-This repo is just a template to help you get started quickly. If you're looking for an example of a repo using it, have a look here: https://github.com/maxime1992/my-dev.to
+This repo is just a template to help you get started quickly. If you're looking for an example of a repo using it, have a look here: <https://github.com/maxime1992/my-dev.to>
 
 ## First, what is dev.to?
 
-https://dev.to is a free and open source blogging platform for developers.
+<https://dev.to> is a free and open source blogging platform for developers.
 
 > dev.to (or just DEV) is a platform where software developers write articles, take part in discussions, and build their professional profiles. We value supportive and constructive dialogue in the pursuit of great code and career growth for all members. The ecosystem spans from beginner to advanced developers, and all are welcome to find their place within our community.
 
@@ -40,7 +40,7 @@ This repository is made to **edit** a blog post. Whether it's published or just 
 
 ## How do I configure every blog post individually?
 
-A blog post has to have a [**front matter**](https://dev.to/p/editor_guide) header. You can find an example in this repository here: https://github.com/maxime1992/dev.to/blob/master/blog-posts/name-of-your-blog-post/name-of-your-blog-post.md
+A blog post has to have a [**front matter**](https://dev.to/p/editor_guide) header. You can find an example in this repository here: <https://github.com/maxime1992/dev.to/blob/master/blog-posts/name-of-your-blog-post/name-of-your-blog-post.md>
 
 Simple and from there you have control over the following properties: `title`, `published`, `cover_image`, `description`, `tags`, `series` and `canonical_url`.
 
@@ -58,7 +58,7 @@ If you want to use Github and Github Actions, a `.github/workflows/main.yml` fil
 - Open up this URL with your own username and repo name of the one you just created using the template: `https://github.com/your-username/your-repo-name/settings/secrets/actions`
 - On the default "Secrets" tab, click on the "New repository secret"
 - In the secret name, write `DEV_TO_GIT_TOKEN`
-- Open up a new tab and go to this URL https://dev.to/settings/extensions. Scroll up to "DEV Community API Keys" and generate a new key. Copy it
+- Open up a new tab and go to this URL <https://dev.to/settings/extensions>. Scroll up to "DEV Community API Keys" and generate a new key. Copy it
 - Go back to the Github tab and paste the key you just copied into the secret input
 
 Enjoy.
@@ -67,10 +67,10 @@ Enjoy.
 
 The following is simply a template that you may want to use for your own version of that repository.
 
-# \<YOUR NAME\>'s blog source
+# Denrei's blog source
 
-https://dev.to/\<YOUR DEV.TO NICKNAME\>
+<https://dev.to/denrei>
 
 ## Blog posts
 
-- [\<BLOG POST NAME\>](https://dev.to/\<BLOG POST LINK\>)
+<!-- - [\<BLOG POST NAME\>](https://dev.to/\<BLOG POST LINK\>) -->
