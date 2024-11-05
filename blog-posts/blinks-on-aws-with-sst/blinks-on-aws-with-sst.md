@@ -20,15 +20,35 @@ Most projects I know that revolves around _Blinks_ or [**Blockchain Links**](htt
 
 Given that Solana Actions are just APIs, you can just use Express, Fastify, and other Node.js backends.
 
-And in this blog, we'll develop and deploy our Blinks on Lambda with API Gateway via SST!
+And in this blog, we'll develop and deploy our Blinks using SST!
 
-### What is SST?
+### Now what is SST?
 
-> Serverless Stack (SST) is an open-source framework that makes it easy to build serverless applications on AWS [(SST)](https://sst.dev).
+> Serverless Stack (SST) is a framework that makes it easy to build modern full-stack applications on your own infrastructure [(SST)](https://sst.dev).
+
+---
+
+### What we'll build
+
+A simple Donate _Blink_ that allows users to donate to a specific wallet address on [_devnet_](https://solana.com/docs/core/clusters#devnet).
+
+> If you want to know more about how Blinks work, you can check out the [Solana Actions and Blockchain Links](https://solana.com/solutions/actions) documentation.
+
+### Things to assume
+
+1. A wallet with some SOL on [_devnet_](https://solana.com/docs/core/clusters#devnet). No worries, you don't have to spend real money here
 
 ### Prerequisites
 
+1. [Node.js](https://nodejs.org/en/download/) installed on your machine.
+2. AWS Account
+
 ### Project Setup
+
+1. create project
+2. install sst
+3. project structure
+4. file contents
 
 ## Outro
 
