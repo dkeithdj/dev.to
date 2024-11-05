@@ -1,6 +1,6 @@
 ---
 published: false
-title: 'Blinks on AWS via SST'
+title: 'Blinks on AWS with SST'
 # cover_image: https://raw.githubusercontent.com/YOUR-USERNAME/YOUR-REPO/master/blog-posts/NAME-OF-YOUR-BLOG-POST/assets/your-asset.png
 description: 'Develop and deploy Blinks on AWS via SST.'
 tags: aws, sst, solana, typescript
