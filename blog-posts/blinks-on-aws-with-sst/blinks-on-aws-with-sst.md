@@ -24,6 +24,14 @@ Serverless Stack (SST) is a framework that makes it easy to build modern full-st
 
 ---
 
+Overview:
+
+1. Project Setup
+2. Building the Donate Blink
+3. Configure the SST
+
+---
+
 ### What we'll build
 
 A simple Donate _Blink_ that allows users to donate to a specific wallet address on [_devnet_](https://solana.com/docs/core/clusters#devnet).
@@ -99,7 +107,7 @@ npx sst init
 Don't forget to add a `.gitignore` file, we don't want to commit the `node_modules` and `.sst` folders
 
 ```bash
-# .gitignore
+# contents of your .gitignore, feel free to add more
 
 node_modules
 .sst
