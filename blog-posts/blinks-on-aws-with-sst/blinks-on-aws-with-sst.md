@@ -8,7 +8,7 @@ series:
 canonical_url:
 ---
 
-Most projects I know that revolves around _Blinks_ or [**Blockchain Links**](https://solana.com/solutions/actions) often use Next.js's [API Routes](https://nextjs.org/docs/app/api-reference/file-conventions/route) to develop and deploy _Blinks_.
+Most projects I know that revolves around _Blinks_ or [**Blockchain Links**](https://solana.com/solutions/actions) often use Next.js's [API Routes](https://nextjs.org/docs/app/api-reference/file-conventions/route) to develop and deploy _Blinks_. Apart from Next.js, you can build _Blinks_ on your favorite Node backend! But in this blog, we'll use [**Serverless Stack (SST)**](https://sst.dev) to develop and deploy our Blinks on AWS!
 
 ## What are Blinks?
 
@@ -16,13 +16,9 @@ Blockchain Links, or Blinks turn any [Solana Action](https://solana.com/solution
 
 ## What are Solana Actions?
 
-Solana Actions are specification-compliant APIs that return transactions on the Solana blockchain to be previewed, signed, and sent accross various contexts, including QR codes, buttons + widgets in mobile and desktop application and websites across the internet [(Blockchain Links and Solana Actions)](<https://solana.com/solutions/actions#what-are-solana-actions-and-blockchain-links-(blinks)>).
+Solana Actions are **specification-compliant APIs** that return transactions on the Solana blockchain to be previewed, signed, and sent accross various contexts, including QR codes, buttons + widgets in mobile and desktop application and websites across the internet [(Blockchain Links and Solana Actions)](<https://solana.com/solutions/actions#what-are-solana-actions-and-blockchain-links-(blinks)>).
 
-Given that Solana Actions are just APIs, you can just use Express, Fastify, and other Node.js backends.
-
-And in this blog, we'll develop and deploy our Blinks using SST!
-
-### Now what is SST?
+### What is SST?
 
 Serverless Stack (SST) is a framework that makes it easy to build modern full-stack applications on your own infrastructure [(SST)](https://sst.dev).
 
@@ -41,13 +37,27 @@ A simple Donate _Blink_ that allows users to donate to a specific wallet address
 
 ### Project Setup
 
-1. Create the project
+> If you want to check the reference code, you can check it out [here](https://github.com/dkeithdj/sst-blinks).
+
+Let's create the project and install the dependencies.
 
 ```bash
-npm init
+mkdir sst-blinks && cd sst-blinks
+npm init # answer the questions as you see fit
+
+# dependencies
+npm i typescript @solana/web3.js @solana/actions aws-sdk
+# dev dependencies
+npm i typescript @aws-sdk/types @types/aws-lambda --save-dev
 ```
 
-2. Setup `tsconfig.json`
+Initialize typescript
+
+```bash
+npx tsc --init
+```
+
+Setup `tsconfig.json` by copying this configuration
 
 ```ts
 // ./code/tsconfig.json
@@ -77,14 +87,25 @@ npm init
 
 ```
 
-Install and initialize SST
+Initialize SST. As of time of writing, the SST version is `3.3.3`
 
 ```bash
 npx sst init
-npx sst install
+# answer the default questions
+# Template: js
+# Using: aws
 ```
 
-Now you have this project structure
+Don't forget to add a `.gitignore` file, we don't want to commit the `node_modules` and `.sst` folders
+
+```bash
+# .gitignore
+
+node_modules
+.sst
+```
+
+After setting up everything, you have this project structure:
 
 ```bash
 .
@@ -107,7 +128,7 @@ Create a `src` directory and add the following files
 ...
 ```
 
-This is the final project structure
+Now this is the final project structure
 
 ```bash
 .
@@ -130,3 +151,7 @@ This will be an overview of the code, you can check out the full code on the [Gi
 ## Outro
 
 This blog does not say that deploying blinks on Next.js is heavy/bloated etc. The purpose of this blog lets you have another method of deploying Blinks.
+
+```
+
+```
