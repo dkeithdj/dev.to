@@ -55,6 +55,30 @@ npm init
 
 ```ts
 // ./code/tsconfig.json
+
+{
+  "compilerOptions": {
+    "types": ["node"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"]
+}
+
 ```
 
 3. install SST
@@ -64,8 +88,44 @@ npx sst init
 npx sst install
 ```
 
-3. project structure
-4. file contents
+Now you have this project structure
+
+```bash
+.
+├── package-lock.json
+├── package.json
+├── README.md
+├── sst-env.d.ts
+├── sst.config.ts
+└── tsconfig.json
+```
+
+Create a `src` directory and add the following files
+
+```bash
+...
+├── src
+│   ├── actions.ts
+│   ├── donate.ts
+│   └── util.ts
+...
+```
+
+This is the final project structure
+
+```bash
+.
+├── package-lock.json
+├── package.json
+├── README.md
+├── src
+│   ├── actions.ts
+│   ├── donate.ts
+│   └── util.ts
+├── sst-env.d.ts
+├── sst.config.ts
+└── tsconfig.json
+```
 
 ## Outro
 
