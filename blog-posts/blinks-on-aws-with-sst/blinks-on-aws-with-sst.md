@@ -45,8 +45,25 @@ A simple Donate _Blink_ that allows users to donate to a specific wallet address
 
 ### Project Setup
 
-1. create project
-2. install sst
+1. Create the project
+
+```bash
+npm init
+```
+
+2. Setup `tsconfig.json`
+
+```ts
+// ./code/tsconfig.json
+```
+
+3. install SST
+
+```bash
+npx sst init
+npx sst install
+```
+
 3. project structure
 4. file contents
 
