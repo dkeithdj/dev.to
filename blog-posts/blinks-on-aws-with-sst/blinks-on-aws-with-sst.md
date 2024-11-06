@@ -18,9 +18,9 @@ Blockchain Links, or Blinks turn any [Solana Action](https://solana.com/solution
 
 ## What are Solana Actions?
 
-![Solana Actions Execution and Lifecycle](https://solana-developer-content.vercel.app/assets/docs/action-execution-and-lifecycle.png)
-
-<center>Solana Actions Execution and Lifecycle</center>
+| ![Solana Actions Execution and Lifecycle](https://solana-developer-content.vercel.app/assets/docs/action-execution-and-lifecycle.png) |
+| :-: |
+| _Solana Actions Execution and Lifecycle_ |
 
 Solana Actions are **specification-compliant APIs** that return transactions on the Solana blockchain to be previewed, signed, and sent accross various contexts, including QR codes, buttons + widgets in mobile and desktop application and websites across the internet [(Blockchain Links and Solana Actions)](<https://solana.com/solutions/actions#what-are-solana-actions-and-blockchain-links-(blinks)>).
 
