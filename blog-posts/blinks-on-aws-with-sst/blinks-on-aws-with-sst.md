@@ -162,9 +162,37 @@ Now this is the final project structure
 
 Now that we've setup the project, let's build the API!
 
-> If want to check out the full code, you can find it[here](https://github.com/dkeithdj/sst-blinks)!
+> If want to check out the full code, you can find it [here](https://github.com/dkeithdj/sst-blinks)!
 
-###
+### Configure AWS CLI
+
+SST uses the AWS CLI to deploy your project. Make sure you have the AWS CLI installed and configured to your AWS account as SST will deploy the resources there you can read more [here](https://sst.dev/docs/aws-accounts#configure-aws-cli).
+
+### Create the GET API
+
+#### Configure the API in `sst.config.ts`
+
+#### Run the command
+
+```bash
+npx sst dev
+```
+
+Deploying may take a while but after it is successful, you can now access the URL with the format:
+
+`https://<api-id>.execute-api.<region>.amazonaws.com/<api-endpoint>`
+
+#### Test the blink
+
+You can check the blink by going to [dial.to](https://dial.to) and pasting the link of your API with this format:
+
+`https://dial.to/?action=solana-action:<your-absolute-https-url>`
+
+Example:
+
+`https://dial.to/?action=solana-action:https://<api-id>.execute-api.<region>.amazonaws.com/api/donate`
+
+### Create the POST API
 
 ## Outro
 
