@@ -391,23 +391,20 @@ export async function prepareDonateTransaction(
 
 #### Configure the API in `sst.config.ts`
 
-<!-- embedme ./src/sst.config.post.ts -->
+<!-- embedme ./src/sst.config.post.ts#L11-L21 -->
 
 ```ts
-//...
-  async run() {
-    const api = new sst.aws.ApiGatewayV2('Actions');
+async run() {
+  const api = new sst.aws.ApiGatewayV2('Actions');
 
-    api.route('GET /api/donate', {
-      handler: 'src/donate.get',
-    });
-    api.route('OPTIONS /api/donate', {
-      handler: 'src/donate.options',
-    });
-    api.route('POST /api/donate/{amount}', { handler: 'src/donate.post' });
-  },
-//...
-
+  api.route('GET /api/donate', {
+    handler: 'src/donate.get',
+  });
+  api.route('OPTIONS /api/donate', {
+    handler: 'src/donate.options',
+  });
+  api.route('POST /api/donate/{amount}', { handler: 'src/donate.post' });
+},
 ```
 
 What we just did is just add a new API route on `api/donate/{amount}`
