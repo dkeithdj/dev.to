@@ -267,8 +267,9 @@ export default $config({
 
 Let's focus on the `run` function. It creates an API Gateway with the name `Actions` and adds two routes:
 
-|   GET   | `/api/donate` |
+| Method  |      url      |
 | :-----: | :-----------: |
+|   GET   | `/api/donate` |
 | OPTIONS | `/api/donate` |
 
 #### Run the command
@@ -418,11 +419,17 @@ npx sst dev
 
 #### Test the blink again
 
+You are now able to try and donate to the wallet address you specified.
+
 `https://dial.to/?action=solana-action:https://<api-id>.execute-api.<region>.amazonaws.com/api/donate`
+
+### Create the `actions.json` endpoint
+
+The purpose of the `actions.json` file allows an application to instruct clients on what website URLs support Solana Actions and provide a mapping that can be used to perform GET requests to an Actions API server.
 
 ## Deploy to Production
 
-Deploying with SST is easy. Just run the following command:
+Deploying on production with SST is easy. Just run the following command:
 
 ```bash
 npx sst deploy --stage production
