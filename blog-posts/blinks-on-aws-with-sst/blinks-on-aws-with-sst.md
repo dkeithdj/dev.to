@@ -12,7 +12,7 @@ Most projects I know that revolves around _Blinks_ or [**Blockchain Links**](htt
 
 ---
 
-## What are Blinks?
+# What are Blinks?
 
 <figure>
   <img src="https://www.dialect.to/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbefore-after.22f7b7f7.png&w=1200&q=75">
@@ -21,7 +21,7 @@ Most projects I know that revolves around _Blinks_ or [**Blockchain Links**](htt
 
 Blockchain Links, or Blinks turn any [Solana Action](https://solana.com/solutions/actions) into a shareable, metadata-rich link. Blinks allow Action-aware clients such as browser extension wallets, bots, etc. to display additional capabilities for the user [(Blockchain Links and Solana Actions)](<https://solana.com/solutions/actions#what-are-solana-actions-and-blockchain-links-(blinks)>).
 
-## What are Solana Actions?
+# What are Solana Actions?
 
 <figure>
   <img src="https://solana-developer-content.vercel.app/assets/docs/action-execution-and-lifecycle.png">
@@ -30,24 +30,24 @@ Blockchain Links, or Blinks turn any [Solana Action](https://solana.com/solution
 
 Solana Actions are **specification-compliant APIs** that return transactions on the Solana blockchain to be previewed, signed, and sent accross various contexts, including QR codes, buttons + widgets in mobile and desktop application and websites across the internet [(Blockchain Links and Solana Actions)](<https://solana.com/solutions/actions#what-are-solana-actions-and-blockchain-links-(blinks)>).
 
-## What is SST?
+# What is SST?
 
 Serverless Stack (SST) is a framework that makes it easy to build modern full-stack applications on your own infrastructure [(SST)](https://sst.dev).
 
 ---
 
-## What we'll build
+# What we'll build
 
 A simple Donate _Blink_ that allows users to donate to a specific wallet address on [_devnet_](https://solana.com/docs/core/clusters#devnet).
 
 > If you want to know more about how Blinks work, you can check out the [Solana Actions and Blockchain Links](https://solana.com/solutions/actions) documentation.
 
-## Prerequisites
+# Prerequisites
 
 1. [Node.js](https://nodejs.org/en/download/) installed on your machine.
 2. AWS Account
 
-## Project Setup
+# Project Setup
 
 > If you want to check the reference code, you can check it out [here](https://github.com/dkeithdj/sst-blinks).
 
@@ -158,17 +158,17 @@ Now this is the final project structure
 └── tsconfig.json
 ```
 
-## Building the Donate Blink
+# Building the Donate Blink
 
 Now that we've setup the project, let's build the API!
 
 > If want to check out the full code, you can find it [here](https://github.com/dkeithdj/sst-blinks)!
 
-### Configure AWS CLI
+## Configure AWS CLI
 
 SST uses the AWS CLI to deploy your project. Make sure you have the AWS CLI installed and configured to your AWS account as SST will deploy the resources there you can read more [here](https://sst.dev/docs/aws-accounts#configure-aws-cli).
 
-### Create the GET API
+## Create the GET API
 
 Let's create the GET API that will return the metadata of the blink.
 
@@ -225,7 +225,7 @@ export const get: Handler = async (event: APIGatewayProxyEvent, context) => {
 export const options = get;
 ```
 
-#### Code walkthrough
+### Code walkthrough
 
 Under `actionMetadata`, it includes data on how a blink will be displayed. You can check its properties [here](https://solana.com/docs/advanced/actions#get-response-body).
 
@@ -239,7 +239,7 @@ The `get` function returns the metadata of the action as well as the CORS header
 
 The `options` function is a simple copy of the `get` function. It is used to handle the preflight request for CORS.
 
-#### Configure the API in `sst.config.ts`
+### Configure the API in `sst.config.ts`
 
 <!-- embedme ./src/sst.config.get.ts#L3-L50 -->
 
@@ -272,7 +272,7 @@ Let's focus on the `run` function. It creates an API Gateway with the name `Acti
 |   GET   | `/api/donate` |
 | OPTIONS | `/api/donate` |
 
-#### Run the command
+### Run the command
 
 ```bash
 # Development mode
@@ -283,7 +283,7 @@ Deploying may take a while but after it is successful, you can now access the UR
 
 `https://<api-id>.execute-api.<region>.amazonaws.com/<api-endpoint>`
 
-#### Test the blink
+### Test the blink
 
 You can check the blink by going to [dial.to](https://dial.to) and pasting the link of your API with this format:
 
@@ -295,9 +295,9 @@ Example:
 
 ![Donate Blink](./assets/solana-action.png 'Donate Blink')
 
-> You will see a warning that the actions has not yet been registered. That is normal as Dialect requires Blinks to be registered first before using it on different websites for security purposes.
+> You will see a warning that the actions has not yet been registered. That is normal as **Dialect** requires **Blinks** to be registered first before using it on different websites for security purposes.
 
-### Create the POST API
+## Create the POST API
 
 Now that we have the GET API, let's create the POST API that will handle the donation.
 
@@ -342,7 +342,7 @@ export const post: Handler = async (event: APIGatewayProxyEvent, context) => {
 };
 ```
 
-#### Code walkthrough
+### Code walkthrough
 
 - We first get the `amount` from the url path parameters. If it is not present, we use the default donation amount.
 - We then parse the body of the request to get the `account` of the user.
@@ -392,7 +392,7 @@ export async function prepareDonateTransaction(
 - We then create a response using the `createPostResponse` function.
 - Finally, we return the response with the CORS headers.
 
-#### Configure the API in `sst.config.ts`
+### Configure the API in `sst.config.ts`
 
 <!-- embedme ./src/sst.config.post.ts#L11-L21 -->
 
@@ -412,24 +412,24 @@ async run() {
 
 What we just did is just add a new API route on `api/donate/{amount}`
 
-#### Run the command
+### Run the command
 
 ```bash
 # Development mode
 npx sst dev
 ```
 
-#### Test the blink again
+### Test the blink again
 
 You are now able to try and donate to the wallet address you specified.
 
 `https://dial.to/?action=solana-action:https://<api-id>.execute-api.<region>.amazonaws.com/api/donate`
 
-### Create the `actions.json` endpoint
+## Create the `actions.json` endpoint
 
 The purpose of the `actions.json` file allows an application to instruct clients on what website URLs support Solana Actions and provide a mapping that can be used to perform GET requests to an Actions API server.
 
-## Deploy to Production
+# Deploy to Production
 
 Deploying on production with SST is easy. Just run the following command:
 
@@ -440,7 +440,7 @@ npx sst deploy --stage production
 
 It will output a new URL that you can use to test your blink.
 
-## Cleanup
+# Cleanup
 
 Removing the resources is as easy as deploying them. Just run the following command:
 
@@ -449,7 +449,7 @@ npx sst remove # to remove the resources in the development stage
 npx sst remove --stage production # to remove the resources in the production stage
 ```
 
-## Outro
+# Outro
 
 Feel free to create a git repository and push your code to GitHub. You can also deploy your project to AWS by running `npx sst deploy`.
 
