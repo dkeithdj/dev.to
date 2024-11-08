@@ -344,7 +344,7 @@ export const post: Handler = async (event: APIGatewayProxyEvent, context) => {
 - We first get the `amount` from the url path parameters. If it is not present, we use the default donation amount.
 - We then parse the body of the request to get the `account` of the user.
 - After that, we prepare the transaction using the `prepareDonateTransaction` function.
-- > The `prepareDonateTransaction` function is a custom function that prepares the transaction to send the donation to the wallet address.
+- The `prepareDonateTransaction` function is a custom function that prepares the transaction to send the donation to the wallet address. For further details, check the docs [here](https://solana.com/docs/core/transactions).
 
 <!-- embedme ./src/util.ts -->
 
@@ -385,6 +385,13 @@ export async function prepareDonateTransaction(
   return prepareTransaction(instructions, sender);
 }
 ```
+
+- We then create a response using the `createPostResponse` function.
+- Finally, we return the response with the CORS headers.
+
+#### Configure the API in `sst.config.ts`
+
+<!-- embedme ./src/sst.config.post.ts -->
 
 ```ts
 //...
