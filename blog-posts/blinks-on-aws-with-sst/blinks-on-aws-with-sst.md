@@ -72,7 +72,7 @@ npx tsc --init
 Setup `tsconfig.json` by copying this configuration
 
 ```ts
-// ./code/tsconfig.json
+// ./src/tsconfig.json
 
 {
   "compilerOptions": {
@@ -169,6 +169,52 @@ Now that we've setup the project, let's build the API!
 SST uses the AWS CLI to deploy your project. Make sure you have the AWS CLI installed and configured to your AWS account as SST will deploy the resources there you can read more [here](https://sst.dev/docs/aws-accounts#configure-aws-cli).
 
 ### Create the GET API
+
+```ts
+// ./src/donate.ts#L12-L48
+
+export const get: Handler = async (event: APIGatewayProxyEvent, context) => {
+  const amountParameterName = 'amount';
+  const actionMetadata: ActionGetResponse = {
+    icon: 'https://avatars.githubusercontent.com/u/42316655?v=4',
+    label: `${DEFAULT_DONATION_AMOUNT_SOL} SOL`,
+    title: 'Donate',
+    description: 'Donate to support the project',
+    links: {
+      actions: [
+        ...DONATION_AMOUNT_SOL_OPTIONS.map(
+          (amount): LinkedAction => ({
+            type: 'post',
+            label: `${amount} SOL`,
+            href: `/api/donate/${amount}`,
+          }),
+        ),
+        {
+          type: 'post',
+          href: `/api/donate/{${amountParameterName}}`,
+          label: 'Donate',
+          parameters: [
+            {
+              name: amountParameterName,
+              label: 'Enter a custom SOL amount',
+            },
+          ],
+        },
+      ],
+    },
+  };
+  const response = {
+    statusCode: 200,
+    headers: ACTIONS_CORS_HEADERS,
+    body: JSON.stringify(actionMetadata),
+  };
+  return response;
+};
+```
+
+Let's explain the code:
+
+`actionMetadata`
 
 #### Configure the API in `sst.config.ts`
 
