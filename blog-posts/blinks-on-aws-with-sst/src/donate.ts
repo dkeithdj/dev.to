@@ -12,7 +12,7 @@ const DEFAULT_DONATION_AMOUNT_SOL = 1;
 export const get: Handler = async (event: APIGatewayProxyEvent, context) => {
   const amountParameterName = 'amount';
   const actionMetadata: ActionGetResponse = {
-    icon: 'https://avatars.githubusercontent.com/u/42316655?v=4', // Replace with your own icon
+    icon: 'https://pbs.twimg.com/profile_images/1472933274209107976/6u-LQfjG_400x400.jpg', // Replace with your own icon
     label: `${DEFAULT_DONATION_AMOUNT_SOL} SOL`,
     title: 'Donate',
     description: 'Donate to support the project',

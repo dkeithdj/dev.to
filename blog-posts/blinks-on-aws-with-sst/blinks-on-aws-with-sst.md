@@ -188,7 +188,7 @@ const DEFAULT_DONATION_AMOUNT_SOL = 1;
 export const get: Handler = async (event: APIGatewayProxyEvent, context) => {
   const amountParameterName = 'amount';
   const actionMetadata: ActionGetResponse = {
-    icon: 'https://avatars.githubusercontent.com/u/42316655?v=4', // Replace with your own icon
+    icon: 'https://pbs.twimg.com/profile_images/1472933274209107976/6u-LQfjG_400x400.jpg', // Replace with your own icon
     label: `${DEFAULT_DONATION_AMOUNT_SOL} SOL`,
     title: 'Donate',
     description: 'Donate to support the project',
@@ -225,7 +225,7 @@ export const get: Handler = async (event: APIGatewayProxyEvent, context) => {
 export const options = get;
 ```
 
-#### Let's explain the code
+#### Code walkthrough
 
 Under `actionMetadata`, it includes data on how a blink will be displayed. You can check its properties [here](https://solana.com/docs/advanced/actions#get-response-body).
 
@@ -293,7 +293,9 @@ Example:
 
 `https://dial.to/?action=solana-action:https://<api-id>.execute-api.<region>.amazonaws.com/api/donate`
 
-<!-- Image here -->
+![Donate Blink](./assets/solana-action.png 'Donate Blink')
+
+> You will see a warning that the actions has not yet been registered. That is normal as Dialect requires Blinks to be registered first before using it on different websites for security purposes.
 
 ### Create the POST API
 
@@ -340,7 +342,7 @@ export const post: Handler = async (event: APIGatewayProxyEvent, context) => {
 };
 ```
 
-#### Let's explain the code
+#### Code walkthrough
 
 - We first get the `amount` from the url path parameters. If it is not present, we use the default donation amount.
 - We then parse the body of the request to get the `account` of the user.
