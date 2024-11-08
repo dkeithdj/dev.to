@@ -8,7 +8,7 @@ series:
 canonical_url:
 ---
 
-Most projects I know that revolves around _Blinks_ or [**Blockchain Links**](https://solana.com/solutions/actions) often use Next.js's [API Routes](https://nextjs.org/docs/app/api-reference/file-conventions/route) to develop and deploy _Blinks_. Apart from Next.js, you can build _Blinks_ on your favorite Node backend! But in this blog, we'll use [**Serverless Stack (SST)**](https://sst.dev) to develop and deploy our Blinks on AWS!
+Most projects I know that revolves around _Blinks_ or [**Blockchain Links**](https://solana.com/solutions/actions) often use Next.js's [API Routes](https://nextjs.org/docs/app/api-reference/file-conventions/route) to develop and deploy _Blinks_. But did you know that apart from Next.js, you can actually build _Blinks_ on your favorite Node backend? In this blog, we'll use [**Serverless Stack (SST)**](https://sst.dev) to develop and deploy our Blinks on AWS!
 
 ---
 
@@ -168,9 +168,9 @@ Now that we've setup the project, let's build the API!
 
 SST uses the AWS CLI to deploy your project. Make sure you have the AWS CLI installed and configured to your AWS account as SST will deploy the resources there you can read more [here](https://sst.dev/docs/aws-accounts#configure-aws-cli).
 
-## Create the GET API
+## Creating the GET & OPTIONS donate endpoint
 
-Let's create the GET API that will return the metadata of the blink.
+Let's create the endpoint that will return the metadata of the blink. This will be a `GET` method.
 
 <!-- embedme ./src/donate.get.ts#L1-L48 -->
 
@@ -229,8 +229,6 @@ export const options = get;
 
 Under `actionMetadata`, it includes data on how a blink will be displayed. You can check its properties [here](https://solana.com/docs/advanced/actions#get-response-body).
 
-<!-- Image here -->
-
 Within `links.actions`, it specifies an array of actions that can be performed. In this case, we have a list of donation amounts (1, 5, 10) and a custom donation amount.
 
 Every action has a corresponding `href` that points to the API endpoint that will handle the action.
@@ -239,7 +237,7 @@ The `get` function returns the metadata of the action as well as the CORS header
 
 The `options` function is a simple copy of the `get` function. It is used to handle the preflight request for CORS.
 
-### Configure the API in `sst.config.ts`
+### Configure the endpoint in `sst.config.ts`
 
 <!-- embedme ./src/sst.config.get.ts#L3-L50 -->
 
@@ -265,12 +263,16 @@ export default $config({
 });
 ```
 
-Let's focus on the `run` function. It creates an API Gateway with the name `Actions` and adds two routes:
+Upon initializing `sst` in your project, you will have a minimal config of `sst`.
+
+What we've added is in the `run` function where we create an API Gateway with the name `Actions` and add two routes:
 
 | Method  |      url      |
 | :-----: | :-----------: |
 |   GET   | `/api/donate` |
 | OPTIONS | `/api/donate` |
+
+This means that the API will have two endpoints that will handle the `GET` and `OPTIONS` requests.
 
 ### Run the command
 
@@ -279,7 +281,7 @@ Let's focus on the `run` function. It creates an API Gateway with the name `Acti
 npx sst dev
 ```
 
-Deploying may take a while but after it is successful, you can now access the URL with the format:
+SST may take a while to deploy the resources on your AWS Account, but once it is successful, it will output the URL of the API.
 
 `https://<api-id>.execute-api.<region>.amazonaws.com/<api-endpoint>`
 
@@ -297,9 +299,9 @@ Example:
 
 > You will see a warning that the actions has not yet been registered. That is normal as **Dialect** requires **Blinks** to be registered first before using it on different websites for security purposes.
 
-## Create the POST API
+## Creating the POST donate endpoint
 
-Now that we have the GET API, let's create the POST API that will handle the donation.
+Now that we have the GET and OPTIONS endpoints, let's create the POST endpoint that will handle the donation.
 
 <!-- embedme ./src/donate.ts#L51-L86 -->
 
@@ -344,7 +346,7 @@ export const post: Handler = async (event: APIGatewayProxyEvent, context) => {
 
 ### Code walkthrough
 
-- We first get the `amount` from the url path parameters. If it is not present, we use the default donation amount.
+- We first get the `amount` from the URL path parameters. If it is not present, we use the default donation amount (1 SOL).
 - We then parse the body of the request to get the `account` of the user.
 - After that, we prepare the transaction using the `prepareDonateTransaction` function.
 - The `prepareDonateTransaction` function is a custom function that prepares the transaction to send the donation to the wallet address. For further details, check the docs [here](https://solana.com/docs/core/transactions).
@@ -392,7 +394,7 @@ export async function prepareDonateTransaction(
 - We then create a response using the `createPostResponse` function.
 - Finally, we return the response with the CORS headers.
 
-### Configure the API in `sst.config.ts`
+### Configure the POST endpoint in `sst.config.ts`
 
 <!-- embedme ./src/sst.config.post.ts#L11-L21 -->
 
@@ -410,7 +412,15 @@ async run() {
 },
 ```
 
-What we just did is just add a new API route on `api/donate/{amount}`
+What we just did is adding a new API route on `api/donate/{amount}`
+
+So the API now has three endpoints:
+
+| Method  |          url           |
+| :-----: | :--------------------: |
+|   GET   |     `/api/donate`      |
+| OPTIONS |     `/api/donate`      |
+|  POST   | `/api/donate/{amount}` |
 
 ### Run the command
 
@@ -471,6 +481,16 @@ async run() {
 },
 ```
 
+Finally, our API now has five endpoints:
+
+| Method  |          url           |
+| :-----: | :--------------------: |
+|   GET   |     `/api/donate`      |
+| OPTIONS |     `/api/donate`      |
+|  POST   | `/api/donate/{amount}` |
+|   GET   |    `/actions.json`     |
+| OPTIONS |    `/actions.json`     |
+
 # Deploy to Production
 
 Deploying on production with SST is easy. Just run the following command:
@@ -491,8 +511,10 @@ npx sst remove # to remove the resources in the development stage
 npx sst remove --stage production # to remove the resources in the production stage
 ```
 
-# Outro
+# Conclusion
 
-Feel free to create a git repository and push your code to GitHub. You can also deploy your project to AWS by running `npx sst deploy`.
+And that's it! You've successfully deployed your Blinks on AWS using SST. You can now create more Blinks and deploy them on AWS with ease!
 
-This blog does not say that deploying blinks on Next.js is heavy/bloated etc. The purpose of this blog lets you have another method of deploying Blinks.
+Feel free to create a git repository and push your code to GitHub!
+
+If you have any questions or found any issues, feel free to comment below.
