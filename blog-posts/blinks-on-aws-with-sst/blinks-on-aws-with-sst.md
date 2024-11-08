@@ -170,7 +170,7 @@ SST uses the AWS CLI to deploy your project. Make sure you have the AWS CLI inst
 
 ### Create the GET API
 
-<!-- embedme ./src/donate.ts#L12-L50 -->
+<!-- embedme ./src/donate.ts#L12-L49 -->
 
 ```ts
 export const get: Handler = async (event: APIGatewayProxyEvent, context) => {
@@ -203,12 +203,11 @@ export const get: Handler = async (event: APIGatewayProxyEvent, context) => {
       ],
     },
   };
-  const response = {
+  return {
     statusCode: 200,
     headers: ACTIONS_CORS_HEADERS,
     body: JSON.stringify(actionMetadata),
   };
-  return response;
 };
 
 export const options = get;
@@ -274,7 +273,7 @@ Example:
 
 ### Create the POST API
 
-<!-- embedme ./src/donate.ts#L52-L87 -->
+<!-- embedme ./src/donate.ts#L51-L86 -->
 
 ```ts
 export const post: Handler = async (event: APIGatewayProxyEvent, context) => {

@@ -39,12 +39,11 @@ export const get: Handler = async (event: APIGatewayProxyEvent, context) => {
       ],
     },
   };
-  const response = {
+  return {
     statusCode: 200,
     headers: ACTIONS_CORS_HEADERS,
     body: JSON.stringify(actionMetadata),
   };
-  return response;
 };
 
 export const options = get;
