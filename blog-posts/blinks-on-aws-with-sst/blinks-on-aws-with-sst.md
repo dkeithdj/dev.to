@@ -8,7 +8,7 @@ series:
 canonical_url:
 ---
 
-Most projects I know that revolves around _Blinks_ or [**Blockchain Links**](https://solana.com/solutions/actions) often use Next.js's [API Routes](https://nextjs.org/docs/app/api-reference/file-conventions/route) to develop and deploy _Blinks_. But did you know that apart from Next.js, you can actually build _Blinks_ on your favorite Node backend? In this blog, we'll use [**Serverless Stack (SST)**](https://sst.dev) to develop and deploy our Blinks on AWS!
+Most projects I know that revolves around _Blinks_ or [**Blockchain Links**](https://solana.com/solutions/actions) often use Next.js's [API Routes](https://nextjs.org/docs/app/api-reference/file-conventions/route) to develop and deploy _Blinks_. But did you know that apart from Next.js, you can actually build _Blinks_ on your favorite Node backend? In this article, we'll use [**Serverless Stack (SST)**](https://sst.dev) to develop and deploy our Blinks on AWS!
 
 ---
 
