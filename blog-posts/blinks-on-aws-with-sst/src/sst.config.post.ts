@@ -1,13 +1,4 @@
-/// <reference path="./.sst/platform/config.d.ts" />
-
-export default $config({
-  app(input) {
-    return {
-      name: 'sst-blinks',
-      removal: input?.stage === 'production' ? 'retain' : 'remove',
-      home: 'aws',
-    };
-  },
+//...
   async run() {
     const api = new sst.aws.ApiGatewayV2('Actions');
 
@@ -19,4 +10,4 @@ export default $config({
     });
     api.route('POST /api/donate/{amount}', { handler: 'src/donate.post' });
   },
-});
+//...

@@ -172,9 +172,19 @@ SST uses the AWS CLI to deploy your project. Make sure you have the AWS CLI inst
 
 Let's create the GET API that will return the metadata of the blink.
 
-<!-- embedme ./src/donate.ts#L12-L49 -->
+<!-- embedme ./src/donate.get.ts#L1-L48 -->
 
 ```ts
+import { LAMPORTS_PER_SOL, PublicKey } from '@solana/web3.js';
+
+import { ActionGetResponse, ACTIONS_CORS_HEADERS, createPostResponse, LinkedAction } from '@solana/actions';
+
+import { APIGatewayProxyEvent, Handler } from 'aws-lambda';
+
+const DONATION_DESTINATION_WALLET = 'EQb8LApPTtZFk3cY7WcaAmEvuL6s3Q1q8ozxcPcBJ5dc'; // Replace with your own wallet address
+const DONATION_AMOUNT_SOL_OPTIONS = [1, 5, 10];
+const DEFAULT_DONATION_AMOUNT_SOL = 1;
+
 export const get: Handler = async (event: APIGatewayProxyEvent, context) => {
   const amountParameterName = 'amount';
   const actionMetadata: ActionGetResponse = {
@@ -215,7 +225,7 @@ export const get: Handler = async (event: APIGatewayProxyEvent, context) => {
 export const options = get;
 ```
 
-##### Let's explain the code
+#### Let's explain the code
 
 Under `actionMetadata`, it includes data on how a blink will be displayed. You can check its properties [here](https://solana.com/docs/advanced/actions#get-response-body).
 
@@ -254,6 +264,12 @@ export default $config({
   },
 });
 ```
+
+Let's focus on the `run` function. It creates an API Gateway with the name `Actions` and adds two routes:
+
+|   GET   | `/api/donate` |
+| :-----: | :-----------: |
+| OPTIONS | `/api/donate` |
 
 #### Run the command
 
@@ -321,6 +337,102 @@ export const post: Handler = async (event: APIGatewayProxyEvent, context) => {
     headers: ACTIONS_CORS_HEADERS,
   };
 };
+```
+
+#### Let's explain the code
+
+- We first get the `amount` from the url path parameters. If it is not present, we use the default donation amount.
+- We then parse the body of the request to get the `account` of the user.
+- After that, we prepare the transaction using the `prepareDonateTransaction` function.
+- > The `prepareDonateTransaction` function is a custom function that prepares the transaction to send the donation to the wallet address.
+
+<!-- embedme ./src/util.ts -->
+
+- > ```ts
+ import {
+   PublicKey,
+   SystemProgram,
+   TransactionInstruction,
+   TransactionMessage,
+   VersionedTransaction,
+ } from '@solana/web3.js';
+ import { clusterApiUrl, Connection } from '@solana/web3.js';
+ 
+ export const connection = new Connection(process.env.SOLANA_RPC! || clusterApiUrl('devnet'));
+ 
+ async function prepareTransaction(instructions: TransactionInstruction[], payer: PublicKey) {
+   const blockhash = await connection.getLatestBlockhash({ commitment: 'max' }).then(res => res.blockhash);
+   const messageV0 = new TransactionMessage({
+     payerKey: payer,
+     recentBlockhash: blockhash,
+     instructions,
+   }).compileToV0Message();
+   return new VersionedTransaction(messageV0);
+ }
+ 
+ export async function prepareDonateTransaction(
+   sender: PublicKey,
+   recipient: PublicKey,
+   lamports: number,
+ ): Promise<VersionedTransaction> {
+   const instructions = [
+     SystemProgram.transfer({
+       fromPubkey: sender,
+       toPubkey: new PublicKey(recipient),
+       lamports: lamports,
+     }),
+   ];
+   return prepareTransaction(instructions, sender);
+ }
+ 
+ ```ts
+//...
+  async run() {
+    const api = new sst.aws.ApiGatewayV2('Actions');
+
+    api.route('GET /api/donate', {
+      handler: 'src/donate.get',
+    });
+    api.route('OPTIONS /api/donate', {
+      handler: 'src/donate.options',
+    });
+    api.route('POST /api/donate/{amount}', { handler: 'src/donate.post' });
+  },
+//...
+
+```
+
+What we just did is just add a new API route on `api/donate/{amount}`
+
+#### Run the command
+
+```bash
+# Development mode
+npx sst dev
+```
+
+#### Test the blink again
+
+`https://dial.to/?action=solana-action:https://<api-id>.execute-api.<region>.amazonaws.com/api/donate`
+
+## Deploy to Production
+
+Deploying with SST is easy. Just run the following command:
+
+```bash
+npx sst deploy --stage production
+
+```
+
+It will output a new URL that you can use to test your blink.
+
+## Cleanup
+
+Removing the resources is as easy as deploying them. Just run the following command:
+
+```bash
+npx sst remove # to remove the resources in the development stage
+npx sst remove --stage production # to remove the resources in the production stage
 ```
 
 ## Outro
