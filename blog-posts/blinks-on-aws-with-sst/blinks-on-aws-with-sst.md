@@ -170,13 +170,15 @@ SST uses the AWS CLI to deploy your project. Make sure you have the AWS CLI inst
 
 ### Create the GET API
 
+Let's create the GET API that will return the metadata of the blink.
+
 <!-- embedme ./src/donate.ts#L12-L49 -->
 
 ```ts
 export const get: Handler = async (event: APIGatewayProxyEvent, context) => {
   const amountParameterName = 'amount';
   const actionMetadata: ActionGetResponse = {
-    icon: 'https://avatars.githubusercontent.com/u/42316655?v=4',
+    icon: 'https://avatars.githubusercontent.com/u/42316655?v=4', // Replace with your own icon
     label: `${DEFAULT_DONATION_AMOUNT_SOL} SOL`,
     title: 'Donate',
     description: 'Donate to support the project',
@@ -213,17 +215,23 @@ export const get: Handler = async (event: APIGatewayProxyEvent, context) => {
 export const options = get;
 ```
 
-Let's explain the code:
+##### Let's explain the code
 
-`actionMetadata` is how a blink will be be displayed. You can check its properties [here](https://solana.com/docs/advanced/actions#get-response-body).
+Under `actionMetadata`, it includes data on how a blink will be displayed. You can check its properties [here](https://solana.com/docs/advanced/actions#get-response-body).
 
 <!-- Image here -->
 
-You can take a look at `links.actions` where it specifies the URL for the POST API.
+Within `links.actions`, it specifies an array of actions that can be performed. In this case, we have a list of donation amounts (1, 5, 10) and a custom donation amount.
+
+Every action has a corresponding `href` that points to the API endpoint that will handle the action.
+
+The `get` function returns the metadata of the action as well as the CORS headers.
+
+The `options` function is a simple copy of the `get` function. It is used to handle the preflight request for CORS.
 
 #### Configure the API in `sst.config.ts`
 
-<!-- embedme ./src/sst.config.ts#L3-L25 -->
+<!-- embedme ./src/sst.config.get.ts#L3-L50 -->
 
 ```ts
 export default $config({
@@ -243,10 +251,6 @@ export default $config({
     api.route('OPTIONS /api/donate', {
       handler: 'src/donate.options',
     });
-    api.route('POST /api/donate/{amount}', { handler: 'src/donate.post' });
-
-    api.route('GET /actions.json', { handler: 'src/actions.get' });
-    api.route('OPTIONS /actions.json', { handler: 'src/actions.options' });
   },
 });
 ```
@@ -254,6 +258,7 @@ export default $config({
 #### Run the command
 
 ```bash
+# Development mode
 npx sst dev
 ```
 
@@ -271,7 +276,11 @@ Example:
 
 `https://dial.to/?action=solana-action:https://<api-id>.execute-api.<region>.amazonaws.com/api/donate`
 
+<!-- Image here -->
+
 ### Create the POST API
+
+Now that we have the GET API, let's create the POST API that will handle the donation.
 
 <!-- embedme ./src/donate.ts#L51-L86 -->
 
