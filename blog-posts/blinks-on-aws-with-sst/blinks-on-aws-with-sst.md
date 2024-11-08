@@ -71,9 +71,9 @@ npx tsc --init
 
 Setup `tsconfig.json` by copying this configuration
 
-```ts
-// ./src/tsconfig.json
+<!-- embedme ./src/tsconfig.json -->
 
+```ts
 {
   "compilerOptions": {
     "types": ["node"],
@@ -170,9 +170,9 @@ SST uses the AWS CLI to deploy your project. Make sure you have the AWS CLI inst
 
 ### Create the GET API
 
-```ts
-// ./src/donate.ts#L12-L48
+<!-- embedme ./src/donate.ts#L12-L48 -->
 
+```ts
 export const get: Handler = async (event: APIGatewayProxyEvent, context) => {
   const amountParameterName = 'amount';
   const actionMetadata: ActionGetResponse = {
@@ -214,9 +214,41 @@ export const get: Handler = async (event: APIGatewayProxyEvent, context) => {
 
 Let's explain the code:
 
-`actionMetadata`
+`actionMetadata` is how a blink will be be displayed. You can check its properties [here](https://solana.com/docs/advanced/actions#get-response-body).
+
+<!-- Image here -->
+
+You can take a look at `links.actions` where it specifies the URL for the POST API.
 
 #### Configure the API in `sst.config.ts`
+
+<!-- embedme ./src/sst.config.ts#L3-L25 -->
+
+```ts
+export default $config({
+  app(input) {
+    return {
+      name: 'sst-blinks',
+      removal: input?.stage === 'production' ? 'retain' : 'remove',
+      home: 'aws',
+    };
+  },
+  async run() {
+    const api = new sst.aws.ApiGatewayV2('Actions');
+
+    api.route('GET /api/donate', {
+      handler: 'src/donate.get',
+    });
+    api.route('OPTIONS /api/donate', {
+      handler: 'src/donate.options',
+    });
+    api.route('POST /api/donate/{amount}', { handler: 'src/donate.post' });
+
+    api.route('GET /actions.json', { handler: 'src/actions.get' });
+    api.route('OPTIONS /actions.json', { handler: 'src/actions.options' });
+  },
+});
+```
 
 #### Run the command
 
