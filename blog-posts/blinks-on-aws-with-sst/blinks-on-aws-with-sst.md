@@ -101,7 +101,7 @@ Setup `tsconfig.json` by copying this configuration
 
 Initialize SST.
 
-> As of time of writing, the SST version is `3.3.3`
+> As of the time of writing, the SST version is `3.3.3`
 
 ```bash
 npx sst init
