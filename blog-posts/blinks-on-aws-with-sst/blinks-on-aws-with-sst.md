@@ -1,7 +1,7 @@
 ---
 published: false
 title: 'Blinks on AWS with SST'
-cover_image: https://raw.githubusercontent.com/dkeithdj/dev.to/main/blog-posts/blinks-on-aws-with-sst/assets/cover-sst-blinks.png
+cover_image: https://raw.githubusercontent.com/dkeithdj/dev.to/main/blog-posts/blinks-on-aws-with-sst/assets/cover-sst.png
 description: 'Develop and deploy Blinks on AWS via SST.'
 tags: aws, sst, solana, typescript
 series:
