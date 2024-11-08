@@ -46,6 +46,9 @@ export const get: Handler = async (event: APIGatewayProxyEvent, context) => {
   };
   return response;
 };
+
+export const options = get;
+
 export const post: Handler = async (event: APIGatewayProxyEvent, context) => {
   const amount = event.pathParameters?.amount ?? DEFAULT_DONATION_AMOUNT_SOL.toString();
 
@@ -82,5 +85,3 @@ export const post: Handler = async (event: APIGatewayProxyEvent, context) => {
     headers: ACTIONS_CORS_HEADERS,
   };
 };
-
-export const options = get;

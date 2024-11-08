@@ -170,7 +170,7 @@ SST uses the AWS CLI to deploy your project. Make sure you have the AWS CLI inst
 
 ### Create the GET API
 
-<!-- embedme ./src/donate.ts#L12-L48 -->
+<!-- embedme ./src/donate.ts#L12-L50 -->
 
 ```ts
 export const get: Handler = async (event: APIGatewayProxyEvent, context) => {
@@ -210,6 +210,8 @@ export const get: Handler = async (event: APIGatewayProxyEvent, context) => {
   };
   return response;
 };
+
+export const options = get;
 ```
 
 Let's explain the code:
@@ -271,6 +273,47 @@ Example:
 `https://dial.to/?action=solana-action:https://<api-id>.execute-api.<region>.amazonaws.com/api/donate`
 
 ### Create the POST API
+
+<!-- embedme ./src/donate.ts#L52-L87 -->
+
+```ts
+export const post: Handler = async (event: APIGatewayProxyEvent, context) => {
+  const amount = event.pathParameters?.amount ?? DEFAULT_DONATION_AMOUNT_SOL.toString();
+
+  const body = await JSON.parse(event.body || '{}');
+  let account;
+
+  try {
+    account = new PublicKey(body.account);
+  } catch (error) {
+    return {
+      statusCode: 400,
+      body: 'Invalid account',
+      headers: ACTIONS_CORS_HEADERS,
+    };
+  }
+
+  const parsedAmount = parseFloat(amount);
+  const transaction = await prepareDonateTransaction(
+    new PublicKey(account),
+    new PublicKey(DONATION_DESTINATION_WALLET),
+    parsedAmount * LAMPORTS_PER_SOL,
+  );
+
+  const response = await createPostResponse({
+    fields: {
+      type: 'transaction',
+      transaction: transaction,
+    },
+  });
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify(response),
+    headers: ACTIONS_CORS_HEADERS,
+  };
+};
+```
 
 ## Outro
 
