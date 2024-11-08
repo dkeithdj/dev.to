@@ -346,9 +346,9 @@ export const post: Handler = async (event: APIGatewayProxyEvent, context) => {
 - After that, we prepare the transaction using the `prepareDonateTransaction` function.
 - The `prepareDonateTransaction` function is a custom function that prepares the transaction to send the donation to the wallet address. For further details, check the docs [here](https://solana.com/docs/core/transactions).
 
-<!-- embedme ./src/util.ts -->
-
 ```ts
+// ./src/util.ts
+
 import {
   PublicKey,
   SystemProgram,
@@ -395,17 +395,17 @@ export async function prepareDonateTransaction(
 
 ```ts
 //...
- async run() {
-   const api = new sst.aws.ApiGatewayV2('Actions');
+  async run() {
+    const api = new sst.aws.ApiGatewayV2('Actions');
 
-   api.route('GET /api/donate', {
-     handler: 'src/donate.get',
-   });
-   api.route('OPTIONS /api/donate', {
-     handler: 'src/donate.options',
-   });
-   api.route('POST /api/donate/{amount}', { handler: 'src/donate.post' });
- },
+    api.route('GET /api/donate', {
+      handler: 'src/donate.get',
+    });
+    api.route('OPTIONS /api/donate', {
+      handler: 'src/donate.options',
+    });
+    api.route('POST /api/donate/{amount}', { handler: 'src/donate.post' });
+  },
 //...
 
 ```
