@@ -429,6 +429,48 @@ You are now able to try and donate to the wallet address you specified.
 
 The purpose of the `actions.json` file allows an application to instruct clients on what website URLs support Solana Actions and provide a mapping that can be used to perform GET requests to an Actions API server.
 
+<!-- embedme ./src/actions.ts -->
+
+```ts
+import { ACTIONS_CORS_HEADERS } from '@solana/actions';
+import { APIGatewayProxyEvent, Handler } from 'aws-lambda';
+
+export const get: Handler = async (event: APIGatewayProxyEvent, context) => {
+  return {
+    statusCode: 200,
+    headers: ACTIONS_CORS_HEADERS,
+    body: JSON.stringify({
+      rules: [{ pathPattern: '/donate', apiPath: '/api/donate' }],
+    }),
+  };
+};
+
+export const options = get;
+```
+
+`actions.json` endpoint is the same as the `donate` endpoint. However in `actions.json` it returns a JSON object that specifies the rules on where to find the _actions_. You can read more about `actions.json` [here](https://solana.com/docs/advanced/actions#actionsjson).
+
+### Configure `actions.json` endpoint in `sst.config.ts`
+
+<!-- embedme ./src/sst.config.ts#L11-L24 -->
+
+```ts
+async run() {
+  const api = new sst.aws.ApiGatewayV2('Actions');
+
+  api.route('GET /api/donate', {
+    handler: 'src/donate.get',
+  });
+  api.route('OPTIONS /api/donate', {
+    handler: 'src/donate.options',
+  });
+  api.route('POST /api/donate/{amount}', { handler: 'src/donate.post' });
+
+  api.route('GET /actions.json', { handler: 'src/actions.get' });
+  api.route('OPTIONS /actions.json', { handler: 'src/actions.options' });
+},
+```
+
 # Deploy to Production
 
 Deploying on production with SST is easy. Just run the following command:
