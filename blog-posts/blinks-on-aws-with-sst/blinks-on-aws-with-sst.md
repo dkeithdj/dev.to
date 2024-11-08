@@ -289,11 +289,11 @@ SST may take a while to deploy the resources on your AWS Account, but once it is
 
 You can check the blink by going to [dial.to](https://dial.to) and pasting the link of your API with this format:
 
-`https://dial.to/?action=solana-action:<your-absolute-https-url>`
+`https://dial.to/developer?url=<your-absolute-https-url>&cluster=devnet`
 
 Example:
 
-`https://dial.to/?action=solana-action:https://<api-id>.execute-api.<region>.amazonaws.com/api/donate`
+`https://dial.to/developer?url=https://<api-id>.execute-api.<region>.amazonaws.com/api/donate&cluster=devnet`
 
 ![Donate Blink](./assets/solana-action.png 'Donate Blink')
 
@@ -433,7 +433,7 @@ npx sst dev
 
 You are now able to try and donate to the wallet address you specified.
 
-`https://dial.to/?action=solana-action:https://<api-id>.execute-api.<region>.amazonaws.com/api/donate`
+`https://dial.to/developer?url=https://<api-id>.execute-api.<region>.amazonaws.com/api/donate&cluster=devnet`
 
 ## Create the `actions.json` endpoint
 
@@ -501,6 +501,16 @@ npx sst deploy --stage production
 ```
 
 It will output a new URL that you can use to test your blink.
+
+# Demo
+
+Donating 1 SOL
+
+![Demo 1 SOL](./assets/demo-1sol.gif 'Demo 1 SOL')
+
+Donating a custom amount
+
+![Demo custom](./assets/demo-custom.gif 'Demo custom')
 
 # Cleanup
 
