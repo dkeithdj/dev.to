@@ -6,5 +6,9 @@
   {
     "id": 2072751,
     "relativePathToArticle": "./blog-posts/blinks-on-aws-with-sst/blinks-on-aws-with-sst.md"
+  },
+  {
+    "id": 2300215,
+    "relativePathToArticle": "./blog-posts/python-development-with-nix/python-development-with-nix.md"
   }
 ]
