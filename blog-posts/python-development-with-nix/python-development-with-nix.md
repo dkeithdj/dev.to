@@ -1,5 +1,5 @@
 ---
-published: true
+published: false
 title: 'Python Development with Nix'
 cover_image: https://raw.githubusercontent.com/dkeithdj/dev.to/main/blog-posts/blinks-on-aws-with-sst/assets/cover-sst.png
 description: 'Python development setup with Nix'
