@@ -1,7 +1,7 @@
 ---
-published: false
+published: true
 title: 'Python Development with Nix'
-cover_image: https://raw.githubusercontent.com/dkeithdj/dev.to/main/blog-posts/blinks-on-aws-with-sst/assets/cover-sst.png
+cover_image: https://raw.githubusercontent.com/dkeithdj/dev.to/main/blog-posts/python-development-with-nix/assets/fastapi-nix.png
 description: 'Python development setup with Nix'
 tags: python, nix
 series:
@@ -126,7 +126,7 @@ uvicorn main:app --reload
 
 This will start the FastAPI application in development mode, allowing you to make changes and see them reflected in real-time.
 
-![fastapi_nix](https://raw.githubusercontent.com/dkeithdj/dev.to/main/blog-posts/python-development-with-nix/assets/PydevNix.png)
+![fastapi_nix](https://raw.githubusercontent.com/dkeithdj/dev.to/main/blog-posts/python-development-with-nix/assets/fastapi-nix.png)
 
 You can notice above, without nix loaded. `python` is on version `3.12.8` and `uvicorn` was not installed.
 
@@ -134,4 +134,4 @@ With nix loaded, `python` is on version `3.11.11` and `uvicorn` is now installed
 
 # Conclusion
 
-That's it! You've successfully set up a Python development environment using Nix and FastAPI. You can now start building your application and take advantage of the benefits of a reproducible and isolated development environment.
+That's it! You've successfully set up a Python development environment using Nix. You can now start building your application and take advantage of the benefits of a reproducible and isolated development environment.
