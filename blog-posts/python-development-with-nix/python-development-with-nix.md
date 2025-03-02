@@ -1,7 +1,7 @@
 ---
 published: true
 title: 'Python Development with Nix'
-cover_image: https://raw.githubusercontent.com/dkeithdj/dev.to/main/blog-posts/python-development-with-nix/assets/fastapi-nix.png
+cover_image: https://raw.githubusercontent.com/dkeithdj/dev.to/main/blog-posts/python-development-with-nix/assets/PydevNix.png
 description: 'Python development setup with Nix'
 tags: python, nix
 series:
